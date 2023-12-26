@@ -18,7 +18,9 @@ router.post('/login', passport.authenticate('login', { failureRedirect: '/faillo
             name: `${req.user.first_name} ${req.user.last_name}`,
             email: req.user.email,
             age: req.user.age,
-            role: "admin"
+            avatar: req.user.avatar,
+            role: "admin",
+            cart: req.user.cart._id
         }
         return res.send({ status: 'sucess', payload: req.session.user })
     }
@@ -27,8 +29,11 @@ router.post('/login', passport.authenticate('login', { failureRedirect: '/faillo
         name: `${req.user.first_name} ${req.user.last_name}`,
         email: req.user.email,
         age: req.user.age,
-        role: req.user.role
+        avatar: req.user.avatar,
+        role: req.user.role,
+        cart: req.user.cart._id
     }
+
     res.send({ status: "success", payload: req.user })
 })
 router.get('/faillogin', (req, res) => {
@@ -49,7 +54,8 @@ router.get('/githubcallback', passport.authenticate('github', { failureRedirect:
         name: req.user.first_name,
         email: req.user.email,
         avatar: req.user.avatar,
-        role: req.user.role
+        role: req.user.role,
+        cart: req.user.cart._id
     }
     res.redirect('/products')
 })
@@ -60,7 +66,8 @@ router.get('/googlecallback', passport.authenticate('google', { failureRedirect:
         name: req.user.first_name,
         email: req.user.email,
         avatar: req.user.avatar,
-        role: req.user.role
+        role: req.user.role,
+        cart: req.user.cart._id
     }
     res.redirect('/products');
 });

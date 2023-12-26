@@ -19,6 +19,19 @@ export default class cartManager {
         }
     }
 
+    addOnlyCart = async () => {
+        try {
+            const products = {
+                products: []
+            }
+            const cart = await cartModel.create(products)
+            console.log(cart)
+            return cart
+        } catch (error) {
+            return error
+        }
+    }
+
     addCart = async (products) => {
         try {
             let cartData = {}

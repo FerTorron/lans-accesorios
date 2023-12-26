@@ -16,6 +16,15 @@ form.addEventListener('submit', e => {
         console.log(res.status)
         if (res.status === 200) {
             window.location.replace('/')
+        } else {
+            Swal.fire({
+                toast: true,
+                position: "top-right",
+                title: `Credenciales Inválidas`,
+                timer: 2000,
+                showConfirmButton: false,
+                icon: "error"
+            })
         }
     })
 })

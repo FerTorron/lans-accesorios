@@ -26,7 +26,6 @@ router.get("/:cid", async (req, res) => {
     res.json({ status: "success", carritoFound });
 });
 
-
 router.post('/', checkRole(["user", "premium"]), async (req, res) => {
     try {
         const obj = req.body;

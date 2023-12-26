@@ -1,10 +1,43 @@
 const addButton = document.querySelectorAll(".addButton")
+let cartId = null
 
-const agregarProd = (idProduct) => {
-    const url = 'http://localhost:8080/api/carts/'
+const currentUser = () => {
+    const url = 'http://localhost:8080/api/sessions/current';
+
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Error en la solicitud GET');
+        })
+        .catch(error => {
+            console.error('Error en la solicitud GET:', error);
+            throw error;
+        });
+};
+
+currentUser()
+    .then(userData => {
+        const cartIdUser = userData.payload.cart;
+        cartId = cartIdUser
+        console.log('Cart ID:', cartId);
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos del usuario:', error);
+    });
+
+currentUser()
+const agregarProd = (idCart, idProduct) => {
+    const url = `http://localhost:8080/api/carts/${idCart}/products/${idProduct}`
     const bodyPost = [
         {
-            _id: idProduct
+            quantity: 1
         }
     ]
 
@@ -48,6 +81,6 @@ const agregarProd = (idProduct) => {
 addButton.forEach(addButton => {
     addButton.addEventListener("click", (id) => {
         const idProduct = id.target.id;
-        agregarProd(idProduct);
+        agregarProd(cartId, idProduct);
     });
 });

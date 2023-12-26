@@ -14,9 +14,8 @@ function updateProductList(products) {
           <div class="card">
             <div class="contentBx">
               <h2>${product.title}</h2>
-              <p>${product.price}</p>
+              <p>$ ${product.price}</p>
               <span>${product._id}</span>
-              <a href="#">Comprar Ahora</a>
             </div>
           </div>
         </article>        

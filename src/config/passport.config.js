@@ -10,6 +10,9 @@ import CustomError from '../services/errors/CustomError.js'
 import EErrors from "../services/errors/enums.js"
 import { registerUserErrorInfo, loginUserErrorInfo } from "../services/errors/info.js"
 
+import CartManager from "../dao/managers/cartManagerMongo.js"
+const cManager = new CartManager()
+
 const LocalStrategy = local.Strategy;
 const GitHubStrategy = gitHubStrategy.Strategy;
 
@@ -30,13 +33,14 @@ export const initializePassport = () => {
                 console.log('El usuario ya existe')
                 return done(null, false);
             };
+            const cartUser = await cManager.addOnlyCart()
             const newUser = {
                 first_name,
                 last_name,
                 email,
                 age,
                 password: createHash(password),
-                cart: new mongoose.Types.ObjectId()
+                cart: cartUser
             };
 
             let result = await userModel.create(newUser);
@@ -80,12 +84,13 @@ export const initializePassport = () => {
         try {
             let user = await userModel.findOne({ email: profile._json.email })
             if (!user) {
+                const cartUser = await cManager.addOnlyCart()
                 let newUser = {
                     first_name: profile._json.login,
                     email: profile._json.email,
                     avatar: profile._json.avatar_url,
                     role: "user",
-                    cart: new mongoose.Types.ObjectId()
+                    cart: cartUser
                 }
                 let result = await userModel.create(newUser)
                 return done(null, result)
@@ -106,12 +111,13 @@ export const initializePassport = () => {
         try {
             let user = await userModel.findOne({ email: profile.emails[0].value });
             if (!user) {
+                const cartUser = await cManager.addOnlyCart()
                 let newUser = {
                     first_name: profile.displayName,
                     email: profile.emails[0].value,
                     avatar: profile.photos[0].value,
                     role: "user",
-                    cart: new mongoose.Types.ObjectId()
+                    cart: cartUser
                 }
                 let result = await userModel.create(newUser);
                 return done(null, result);
