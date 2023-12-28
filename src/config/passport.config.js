@@ -79,7 +79,7 @@ export const initializePassport = () => {
     passport.use('github', new GitHubStrategy({
         clientID: config.githubClientId,
         clientSecret: config.githubClientSecret,
-        callbackURL: 'http://localhost:8080/api/sessions/githubcallback'
+        callbackURL: config.githubUrl
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             let user = await userModel.findOne({ email: profile._json.email })
@@ -106,7 +106,7 @@ export const initializePassport = () => {
     passport.use('google', new GoogleStrategy({
         clientID: config.googleClientId,
         clientSecret: config.googleClientSecret,
-        callbackURL: 'http://localhost:8080/api/sessions/googlecallback'
+        callbackURL: config.googleUrl
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             let user = await userModel.findOne({ email: profile.emails[0].value });
