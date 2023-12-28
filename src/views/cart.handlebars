@@ -1,12 +1,21 @@
 <div class="mainContainer">
   <div id="carrito">
-    {{#each cart.products}}
-      <div class="card">
-        <h2>{{this._id.title}}</h2>
-        <p>{{this._id.description}}</p>
-        <p>Cantidad: {{this.quantity}}</p>
-        <p>Precio: {{this._id.price}}</p>
-      </div>
-    {{/each}}
+    {{#if cart.products.length}}
+      {{#each cart.products}}
+        <div class="card">
+          <h2>{{this._id.title}}</h2>
+          <p>{{this._id.description}}</p>
+          <p>Cantidad: {{this.quantity}}</p>
+          <p>Precio: {{this._id.price}}</p>
+          <button id="{{this._id}}" class="deleteButton">❌</button>
+        </div>
+      {{/each}}
+      <button class="emptyButton">Vaciar Carrito</button>
+    {{else}}
+      <h3>Carrito Vacío</h3>
+    {{/if}}
   </div>
 </div>
+
+<script src="/js/carrito.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

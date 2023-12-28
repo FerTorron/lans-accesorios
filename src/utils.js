@@ -95,7 +95,8 @@ export const uploaderDocument = multer({ storage: documentStorage });
 const productStorage = multer.diskStorage({
     //donde voy a guardar los archivos
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "/multer/products/images"))
+        // cb(null, path.join(__dirname, "/multer/products/images"))
+        cb(null, path.join(__dirname, "/public/img/products"))
     },
     //que nombre tendra el archivo que guardamos
     filename: function (req, file, cb) {

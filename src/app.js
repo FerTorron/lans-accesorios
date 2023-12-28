@@ -86,7 +86,7 @@ app.get("/loggerTest", (req, res) => {
     res.send("Probando Niveles")
 });
 
-const server = app.listen(8080, () => {
+const server = app.listen(PORT, () => {
     console.log(`Servidor Inicializado en el Puerto ${PORT}`)
 })
 

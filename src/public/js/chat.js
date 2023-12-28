@@ -6,24 +6,6 @@ const chat = document.getElementById("chat")
 
 let usuario = nombreUsuario.textContent
 socketClient.emit("nuevoUsuario", usuario)
-// if (!usuario) {
-//     Swal.fire({
-//         title: "¿Cómo te Llamas?",
-//         text: "Ingresa tu Nombre de Usuario",
-//         input: "text",
-//         inputValidator: (value) => {
-//             if (!value) {
-//                 return "Necesitas ingresar tu Nombre"
-//             }
-//         },
-//         allowOutsideClick: false
-//     })
-//         .then(username => {
-//             usuario = username.value
-//             nombreUsuario.innerHTML = usuario
-//             socketClient.emit("nuevoUsuario", usuario)
-//         })
-// }
 
 formulario.onsubmit = (e) => {
     e.preventDefault()

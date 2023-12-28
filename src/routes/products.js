@@ -8,6 +8,8 @@ import { newProductErrorInfo, deleteProductErrorInfo, editProductErrorInfo } fro
 const router = Router()
 const pManager = new ProductManager()
 
+import { uploaderProduct } from "../utils.js";
+
 router.get("/", async (req, res) => {
     const products = await pManager.getProducts()
     if (products.length === 0) {
@@ -24,13 +26,14 @@ router.get('/:pId', async (req, res) => {
     res.send({ status: 'success', productFind })
 })
 
-router.post("/", checkRole(["admin", "premium"]), async (req, res) => {
+router.post("/", uploaderProduct.single("thumbnail"), checkRole(["admin", "premium"]), async (req, res) => {
     const { title, description, price, category, code, stock } = req.body
     let owner = req.session.user.email
     if (req.session.user.email === "adminCoder@coder.com") {
         owner = "admin"
     }
-    const product = { title, description, price, category, code, stock, owner }
+    const thumbnail = `http://localhost:8080/img/products/${req.file.filename}`;
+    const product = { title, description, price, thumbnail, category, code, stock, owner }
     if (!title || !description || !price || !category || !code || !stock) {
         CustomError.createError({
             name: "Error al Crear el Producto",
