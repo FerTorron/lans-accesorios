@@ -7,6 +7,7 @@ import EErrors from "../services/errors/enums.js"
 import { newProductErrorInfo, deleteProductErrorInfo, editProductErrorInfo } from "../services/errors/info.js"
 const router = Router()
 const pManager = new ProductManager()
+import config from "../config/config.js"
 
 import { uploaderProduct } from "../utils.js";
 
@@ -32,7 +33,7 @@ router.post("/", uploaderProduct.single("thumbnail"), checkRole(["admin", "premi
     if (req.session.user.email === "adminCoder@coder.com") {
         owner = "admin"
     }
-    const thumbnail = `http://localhost:8080/img/products/${req.file.filename}`;
+    const thumbnail = `${config.emailUrl}/img/products/${req.file.filename}`;
     const product = { title, description, price, thumbnail, category, code, stock, owner }
     if (!title || !description || !price || !category || !code || !stock) {
         CustomError.createError({
