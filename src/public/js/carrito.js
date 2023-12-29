@@ -1,6 +1,7 @@
 const addButton = document.querySelectorAll(".addButton")
 const deleteButton = document.querySelectorAll(".deleteButton")
 const emptyButton = document.querySelector(".emptyButton")
+const purchaseButton = document.querySelector(".purchaseButton")
 let cartId = null
 
 const currentUser = () => {
@@ -160,6 +161,46 @@ const vaciarCarrito = (idCart) => {
         });
 }
 
+const purchaseAction = (idCart) => {
+    const url = `/api/carts/${idCart}/purchase`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Solicitud POST exitosa');
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-right",
+                    title: `Compra Realizada con Éxito`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    icon: "info"
+                })
+                window.location.replace('/')
+            } else {
+                console.error('Error en la solicitud POST');
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-right",
+                    title: `Hubo un problema al finalizar su compra`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    icon: "error"
+                })
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud POST:', error);
+        });
+}
+
 addButton.forEach(addButton => {
     addButton.addEventListener("click", (id) => {
         const idProduct = id.target.id;
@@ -176,4 +217,8 @@ deleteButton.forEach(deleteButton => {
 
 emptyButton.addEventListener("click", () => {
     vaciarCarrito(cartId);
+});
+
+purchaseButton.addEventListener("click", () => {
+    purchaseAction(cartId);
 });

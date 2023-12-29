@@ -10,6 +10,7 @@ import CustomError from '../services/errors/CustomError.js'
 import EErrors from "../services/errors/enums.js"
 import { addCartErrorInfo, addProdInCartErrorInfo } from "../services/errors/info.js"
 import { addLogger } from "../utils/logger.js"
+import { cartModel } from "../dao/models/carts.js"
 
 const cManager = new CartManager()
 const pManager = new ProductManager()
@@ -219,6 +220,7 @@ router.post('/:cid/purchase', async (req, res) => {
             const ticketProducts = []
             const rejectedProducts = []
             let amount = 0
+            let prodList = []
 
             for (let i = 0; i < cart.products.length; i++) {
                 const cartProduct = cart.products[i];
@@ -228,12 +230,14 @@ router.post('/:cid/purchase', async (req, res) => {
                 stock -= cartProduct.quantity
                 if (cartProduct.quantity <= productDb.stock) {
                     ticketProducts.push(cartProduct)
+                    prodList.push(productDb._id)
                     pManager.updateProductStock(cartProduct._id._id, stock)
                 } else {
                     rejectedProducts.push(cartProduct)
                     return res.send('No hay Suficiente Stock')
                 }
             }
+            console.log(prodList)
 
             const newTicket = {
                 code: uuidv4(),
@@ -243,6 +247,8 @@ router.post('/:cid/purchase', async (req, res) => {
             }
 
             const ticketCreated = await ticketsModel.create(newTicket)
+            cart.products = []
+            const cartUpdate = await cManager.updateOneProduct(cartId, cart.products)
             res.send(ticketCreated)
         } else {
             res.send("El carrito no existe")

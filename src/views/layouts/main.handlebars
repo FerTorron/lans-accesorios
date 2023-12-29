@@ -16,18 +16,18 @@
   </head>
   <body {{#if isHomePage}}id="home-page"{{/if}}></body>
       <header id="header" {{#unless isHomePage}}class="scrollNav"{{/unless}}>
+        <i id="btn-menu" class="fas fa-bars btnMenu"></i>
         <a href="/"><img src="/img/lansLogoClaro.png" alt="" /></a>
         <nav id="nav">
           <ul>
             <li><a href="/">Inicio</a></li>
             <li><a href="/products">Productos</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li class="profileNav"><a href="/profile"><i
-                  class="fas fa-user"
-                ></i></a></li>
+            <li><a href="/profile">Perfil</a></li>
           </ul>
         </nav>
-        <i id="btn-menu" class="fas fa-bars btnMenu"></i>
+        <a class="carrito" href="/carts/{{user.cart}}">
+          <i class="fas fa-shopping-cart" style="color: #ebe7d9;"></i>
+        </a>
       </header>
       {{{body}}}
   </body>

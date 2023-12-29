@@ -13,7 +13,18 @@ const ticketsSchema = new mongoose.Schema({
     purchaser: {
         type: String,
         required: true
-    }
+    },
+    // products: {
+    //     type: [
+    //         {
+    //             _id: {
+    //                 type: mongoose.Types.ObjectId,
+    //                 ref: 'products'
+    //             }
+    //         }
+    //     ],
+    //     default: []
+    // }
 })
 
 export const ticketsModel = mongoose.model(ticketsCollection, ticketsSchema)

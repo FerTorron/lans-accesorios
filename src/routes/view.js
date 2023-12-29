@@ -71,7 +71,10 @@ router.get('/products', sessionAccess, async (req, res) => {
     }
 })
 
-router.get('/carts/:cid', checkRole("user"), async (req, res) => {
+router.get('/carts', sessionAccess, async (req, res) => {
+    res.render("cart", { cart, title: "Lans - Carrito" })
+})
+router.get('/carts/:cid', sessionAccess, async (req, res) => {
     const cart = await cManager.getCartById(req.params.cid)
     res.render("cart", { cart, title: "Lans - Carrito" })
 })
