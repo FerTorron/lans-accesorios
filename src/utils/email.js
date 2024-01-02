@@ -42,3 +42,16 @@ export const sendDeleteUsers = async (userEmail) => {
         `
     })
 };
+
+export const sendDeleteProduct = async (userEmail, productName) => {
+    await transporter.sendMail({
+        from: "fertorron21@gmail.com",
+        to: userEmail,
+        subject: "Lans - Producto Eliminado",
+        html: `
+            <div>
+                <h2>Se ha eliminado ${productName}</h2>
+            </div>
+        `
+    })
+};

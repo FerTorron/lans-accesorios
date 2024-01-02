@@ -7,6 +7,7 @@ import EErrors from "../services/errors/enums.js"
 import { newProductErrorInfo, deleteProductErrorInfo, editProductErrorInfo } from "../services/errors/info.js"
 const router = Router()
 const pManager = new ProductManager()
+import { sendDeleteProduct } from "../utils/email.js";
 import config from "../config/config.js"
 
 import { uploaderProduct } from "../utils.js";
@@ -74,11 +75,12 @@ router.delete('/:pId', checkRole(["admin", "premium"]), async (req, res) => {
     }
 
     const product = await pManager.getProductById(idProduct)
+    if (product.owner) {
+        await sendDeleteProduct(product.owner, product.title);
+    }
     if (product.owner == req.session.user.email || req.session.user.role == "admin") {
         const deletedProduct = await pManager.deleteProduct(idProduct)
         res.send({ status: 'sucess', deletedProduct })
-    } else if (product.owner == "premium") {
-        console.log("PRemiumg")
     } else {
         CustomError.createError({
             name: "Error al Eliminar el Producto",
