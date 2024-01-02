@@ -2,8 +2,29 @@ import { Router } from "express";
 import { checkRole } from "../middlewares/auth.js";
 import { userModel } from "../dao/models/user.js";
 import { uploaderDocument } from "../utils.js";
+import { sendDeleteUsers } from "../utils/email.js";
 
 const router = Router();
+
+router.get("/", async (req, res) => {
+    try {
+        const users = await userModel.find({}, "first_name last_name email role")
+        res.send(users)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Hubo un error al obtener los usuarios")
+    }
+})
+
+router.delete("/:uid", async (req, res) => {
+    try {
+        const user = await userModel.findByIdAndDelete(req.params.uid)
+        res.send(user)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Hubo un error al obtener los usuarios")
+    }
+})
 
 router.put("/premium/:uid", checkRole(["admin"]), async (req, res) => {
     try {
@@ -66,5 +87,33 @@ router.post("/:uid/documents", uploaderDocument.fields([{ name: "identificacion"
         res.json({ status: "error", message: "hubo un error al cargar los documentos" })
     }
 })
+
+router.delete("/", checkRole(["admin"]), async (req, res) => {
+    try {
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+
+        const usersToDelete = await userModel.find({
+            last_connection: { $lt: twoDaysAgo }
+        });
+
+        const emailsToDelete = usersToDelete.map(user => user.email);
+
+        const deletedUsers = await userModel.deleteMany({
+            last_connection: { $lt: twoDaysAgo }
+        });
+
+        for (const email of emailsToDelete) {
+            await sendDeleteUsers(email);
+        }
+
+        res.json({ status: "success", message: `${deletedUsers.deletedCount} usuarios eliminados` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: "error", message: "Hubo un error al eliminar usuarios" });
+    }
+});
+
 
 export default router;

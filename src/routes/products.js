@@ -77,6 +77,8 @@ router.delete('/:pId', checkRole(["admin", "premium"]), async (req, res) => {
     if (product.owner == req.session.user.email || req.session.user.role == "admin") {
         const deletedProduct = await pManager.deleteProduct(idProduct)
         res.send({ status: 'sucess', deletedProduct })
+    } else if (product.owner == "premium") {
+        console.log("PRemiumg")
     } else {
         CustomError.createError({
             name: "Error al Eliminar el Producto",

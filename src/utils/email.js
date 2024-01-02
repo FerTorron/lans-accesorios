@@ -28,3 +28,17 @@ export const sendRecoveryPass = async (userEmail, token) => {
         `
     })
 };
+
+export const sendDeleteUsers = async (userEmail) => {
+    await transporter.sendMail({
+        from: "fertorron21@gmail.com",
+        to: userEmail,
+        subject: "Lans - Usuario Eliminado",
+        html: `
+            <div>
+                <h2>Se ha eliminado tu usuario</h2>
+                <p>Hemos eliminado tu usuario por inactividad</p>
+            </div>
+        `
+    })
+};

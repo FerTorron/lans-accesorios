@@ -1,0 +1,16 @@
+<div class="mainContainer">
+  <div>
+    <h1>Editar Usuario</h1>
+  </div>
+  <div>
+    <span>ID: {{userEdit._id}}</span>
+    <h3>User: {{userEdit.first_name}}</h3>
+    <p>Email: {{userEdit.email}}</p>
+    <p>Role: {{userEdit.role}}</p>
+    <button id="{{userEdit._id}}" class="editRoleUser">Editar Rol</button>
+    <button id="{{userEdit._id}}" class="deleteUser">Eliminar Usuario</button>
+  </div>
+</div>
+
+<script src="/js/editUser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
