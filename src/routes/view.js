@@ -12,7 +12,7 @@ import { addLogger } from "../utils/logger.js"
 
 
 router.get('/', publicAccess, (req, res) => {
-    res.render("home", { title: "Lans - Home", isHomePage: true })
+    res.render("home", { title: "Lans Accesorios", isHomePage: true })
 })
 
 router.get('/products', sessionAccess, async (req, res) => {
