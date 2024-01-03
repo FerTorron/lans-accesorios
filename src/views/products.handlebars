@@ -1,17 +1,17 @@
 <div class="mainContainer">
-  <h1>Lans Productos</h1>
-  <h2>Bienvenido {{user.name}}</h2>
-  <p>Rol: {{user.role}}</p>
-  <div>
+  <div class="catalogo">
+    <h1>Catálogo</h1>
     {{#if listProducts.length}}
       <section class="productsContainer">
         {{#each listProducts}}
           <div class="productCard">
-            <h3>{{title}}</h3>
-            <h4>{{description}}</h4>
-            <h4>${{price}}</h4>
-            <img src={{thumbnail}} />
-            <button id="{{id}}" class="addButton">Agregar al Carrito</button>
+            <img src={{thumbnail}} alt="{{description}}" />
+            <div class="productCardInfo">
+              <h3>{{title}}</h3>
+              <p>{{description}}</p>
+              <span>${{price}}</span>
+              <button id="{{id}}" class="addButton">Agregar al Carrito</button>
+            </div>
           </div>
         {{/each}}
       </section>
@@ -21,14 +21,14 @@
     <br />
     <br />
     {{#if hasPrevPage}}
-      <a href={{prevLink}}><button>Anterior</button></a>
+      <a href={{prevLink}}><button class="btnLinks">Anterior</button></a>
     {{/if}}
 
     {{#if hasNextPage}}
-      <a href={{nextLink}}><button>Siguiente</button></a>
+      <a href={{nextLink}}><button class="btnLinks">Siguiente</button></a>
     {{/if}}
   </div>
 </div>
 
-<script src="/js/carrito.js"></script>
+<script src="/js/products.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

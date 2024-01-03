@@ -365,6 +365,211 @@ nav ul li:not(.profileNav):hover::after {
   opacity: 0.8;
 }
 
+/* PRODUCTS */
+.catalogo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.catalogo h1 {
+  margin-top: 25px;
+}
+.productsContainer {
+  margin: auto;
+  margin-top: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.productCard {
+  width: 275px;
+  height: 350px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.productCard img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 70%;
+}
+.productCardInfo {
+  padding: 20px;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.productCardInfo h3 {
+  font-size: 1.1rem;
+  color: #21242c;
+}
+.productCardInfo p {
+  font-size: 0.9rem;
+  color: #4c5367;
+}
+.productCardInfo span {
+  font-size: 1rem;
+  color: #4c5367;
+}
+.productCard button {
+  margin: 5px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: 2px solid #277593;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #277593;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.productCard button:hover {
+  background-color: #277593;
+  color: #fff;
+}
+.btnLinks {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: 2px solid #277593;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #277593;
+  color: #fff;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.btnLinks:hover {
+  background: #fff;
+  color: #277593;
+}
+
+/* CARSECTION */
+.cardSection {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.cardSection h3 {
+  font-size: 2.3rem;
+}
+.cardSection a {
+  margin-top: 50px;
+  text-decoration: none;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: 2px solid #277593;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #277593;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.cardSection a:hover {
+  background-color: #277593;
+  color: #fff;
+}
+.cardContainer {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.cardItem {
+  width: 275px;
+  height: 340px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cardItem img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 70%;
+}
+.cardInfo {
+  padding: 20px;
+}
+.cardInfo h4 {
+  font-size: 1.1rem;
+  color: #21242c;
+}
+.cardInfo p {
+  font-size: 0.9rem;
+  color: #4c5367;
+}
+
+/* CARRITO */
+.carritoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.carritoContainer h1 {
+  margin-top: 25px;
+  font-size: 2rem;
+}
+.btnCart {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/* FOOTER */
+footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 100px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+  gap: 32px;
+  background: linear-gradient(rgba(15, 34, 45, 0.8), rgba(15, 34, 45, 0.8)),
+    url("https://images.pexels.com/photos/4173290/pexels-photo-4173290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+      no-repeat center center/cover;
+}
+footer img {
+  width: 200px;
+}
+footer p {
+  color: #fff;
+  font-size: 1.1rem;
+}
+footer .socialIcons {
+  display: flex;
+  gap: 20px;
+}
+footer .socialIcons i {
+  font-size: 2.1rem;
+}
+
 @media screen and (max-width: 768px) {
   .btnMenu {
     z-index: 500;

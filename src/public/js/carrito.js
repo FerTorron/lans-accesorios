@@ -1,4 +1,3 @@
-const addButton = document.querySelectorAll(".addButton")
 const deleteButton = document.querySelectorAll(".deleteButton")
 const emptyButton = document.querySelector(".emptyButton")
 const purchaseButton = document.querySelector(".purchaseButton")
@@ -36,50 +35,6 @@ currentUser()
     });
 
 currentUser()
-const agregarProd = (idCart, idProduct) => {
-    const url = `/api/carts/${idCart}/products/${idProduct}`
-    const bodyPost = [
-        {
-            quantity: 1
-        }
-    ]
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bodyPost),
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('Solicitud POST exitosa');
-
-                Swal.fire({
-                    toast: true,
-                    position: "top-right",
-                    title: `Producto agregado al carrito`,
-                    timer: 2000,
-                    showConfirmButton: false,
-                    icon: "info"
-                })
-            } else {
-                console.error('Error en la solicitud POST');
-
-                Swal.fire({
-                    toast: true,
-                    position: "top-right",
-                    title: `Error al agregar el producto al carrito`,
-                    timer: 2000,
-                    showConfirmButton: false,
-                    icon: "error"
-                })
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud POST:', error);
-        });
-}
 
 const eliminarProd = (idCart, idProduct) => {
     const url = `/api/carts/${idCart}/products/${idProduct}`
@@ -104,7 +59,7 @@ const eliminarProd = (idCart, idProduct) => {
                 })
                 location.reload();
             } else {
-                console.error('Error en la solicitud DELETE');
+                console.log('Error en la solicitud DELETE');
 
                 Swal.fire({
                     toast: true,
@@ -117,7 +72,7 @@ const eliminarProd = (idCart, idProduct) => {
             }
         })
         .catch(error => {
-            console.error('Error en la solicitud POST:', error);
+            console.log('Error en la solicitud POST:', error);
         });
 }
 
@@ -200,13 +155,6 @@ const purchaseAction = (idCart) => {
             console.error('Error en la solicitud POST:', error);
         });
 }
-
-addButton.forEach(addButton => {
-    addButton.addEventListener("click", (id) => {
-        const idProduct = id.target.id;
-        agregarProd(cartId, idProduct);
-    });
-});
 
 deleteButton.forEach(deleteButton => {
     deleteButton.addEventListener("click", (id) => {

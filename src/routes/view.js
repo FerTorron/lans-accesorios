@@ -80,7 +80,7 @@ router.get('/carts/:cid', sessionAccess, async (req, res) => {
     res.render("cart", { cart, title: "Lans - Carrito" })
 })
 
-router.get('/realtimeproducts', checkRole("admin"), (req, res) => {
+router.get('/realtimeproducts', checkRole(["admin", "premium"]), (req, res) => {
     res.render("realTimeProducts", { title: "Lans - Admin Productos" })
 })
 

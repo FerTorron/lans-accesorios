@@ -17,7 +17,7 @@
   <body {{#if isHomePage}}id="home-page"{{/if}}></body>
       <header id="header" {{#unless isHomePage}}class="scrollNav"{{/unless}}>
         <i id="btn-menu" class="fas fa-bars btnMenu"></i>
-        <a href="/"><img src="/img/lansLogoClaro.png" alt="" /></a>
+        <a href="/"><img src="/img/lansLogoClaro.png" alt="Logo Lans" /></a>
         <nav id="nav">
           <ul>
             <li><a href="/">Inicio</a></li>
@@ -30,6 +30,14 @@
         </a>
       </header>
       {{{body}}}
+      <footer>
+        <a href="/"><img src="/img/lansLogoClaro.png" alt="Logo Lans" /></a>
+        <p>Explora la sofisticación del cuero con nuestra selección de cinturones, llaveros, bolsos y más.</p>
+        <div class="socialIcons">
+          <i class="fab fa-whatsapp" style="color: #ffffff;"></i>
+        <i class="fab fa-instagram" style="color: #ffffff;"></i>
+        </div>
+      </footer>
   </body>
   <script
     src="https://kit.fontawesome.com/fc72539189.js"

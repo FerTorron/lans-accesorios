@@ -1,17 +1,24 @@
 <div class="mainContainer">
-  <div id="carrito">
+  <div id="carrito" class="carritoContainer">
+    <h1>Carrito</h1>
     {{#if cart.products.length}}
-      {{#each cart.products}}
-        <div class="card">
-          <h2>{{this._id.title}}</h2>
-          <p>{{this._id.description}}</p>
-          <p>Cantidad: {{this.quantity}}</p>
-          <p>Precio: {{this._id.price}}</p>
-          <button id="{{this._id}}" class="deleteButton">❌</button>
-        </div>
-      {{/each}}
-      <button class="emptyButton">Vaciar Carrito</button>
-      <button class="purchaseButton">Finalizar Compra</button>
+      <section class="productsContainer">
+        {{#each cart.products}}
+          <div class="productCard">
+            <img src={{this._id.thumbnail}} alt="{{this._id.description}}" />
+            <div class="productCardInfo">
+              <h3>{{this._id.title}}</h3>
+              <p>Cantidad: {{this.quantity}}</p>
+              <span>$ {{this._id.price}}</span>
+              <button id="{{this._id._id}}" class="deleteButton">❌</button>
+            </div>
+          </div>
+        {{/each}}
+      </section>
+      <div class="btnCart">
+        <button class="emptyButton btnLinks">Vaciar Carrito</button>
+        <button class="purchaseButton btnLinks">Finalizar Compra</button>
+      </div>
     {{else}}
       <h3>Carrito Vacío</h3>
     {{/if}}
