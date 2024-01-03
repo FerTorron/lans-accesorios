@@ -160,11 +160,11 @@ router.delete('/:cid/products/:pid', async (req, res) => {
         if (!checkIdCart) {
             return res.status(404).send({ status: 'error', message: `Cart with ID: ${cid} not found` });
         }
-        // const findProductIndex = checkIdCart.products.findIndex((product) => product._id.toString() === pid);
-        // if (findProductIndex === -1) {
-        //     return res.status(404).send({ status: 'error', message: `Product with ID: ${pid} not found in cart` });
-        // }
-        // checkIdCart.products.splice(findProductIndex, 1);
+        const findProductIndex = checkIdCart.products.findIndex((product) => product._id.toString() === pid);
+        if (findProductIndex === -1) {
+            return res.status(404).send({ status: 'error', message: `Product with ID: ${pid} not found in cart` });
+        }
+        checkIdCart.products.splice(findProductIndex, 1);
         const updatedCart = await cManager.deleteProductInCart(cid, checkIdCart.products);
         console.log(updatedCart);
         return res.status(200).send({ status: 'success', message: `Deleted product with ID: ${pid}`, cart: updatedCart });
