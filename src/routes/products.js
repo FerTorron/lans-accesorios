@@ -34,7 +34,8 @@ router.post("/", uploaderProduct.single("thumbnail"), checkRole(["admin", "premi
     if (req.session.user.email === "adminCoder@coder.com") {
         owner = "admin"
     }
-    const thumbnail = `${config.emailUrl}/img/products/${req.file.filename}`;
+    // const thumbnail = `${config.emailUrl}/img/products/${req.file.filename}`;
+    const thumbnail = `https://lans-accesorios.up.railway.app/img/products/${req.file.filename}`;
     const product = { title, description, price, thumbnail, category, code, stock, owner }
     if (!title || !description || !price || !category || !code || !stock) {
         CustomError.createError({

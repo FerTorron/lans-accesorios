@@ -465,6 +465,11 @@ nav ul li:not(.profileNav):hover::after {
 }
 .cardSection h3 {
   font-size: 2.3rem;
+  text-align: center;
+}
+.cardSection p {
+  font-size: 1.2rem;
+  text-align: center;
 }
 .cardSection a {
   margin-top: 50px;
@@ -490,6 +495,7 @@ nav ul li:not(.profileNav):hover::after {
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  gap: 20px;
 }
 .cardItem {
   width: 275px;
@@ -516,6 +522,7 @@ nav ul li:not(.profileNav):hover::after {
 .cardInfo p {
   font-size: 0.9rem;
   color: #4c5367;
+  text-align: left;
 }
 
 /* CARRITO */
