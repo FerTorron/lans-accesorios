@@ -30,11 +30,10 @@ router.get('/:pId', async (req, res) => {
 
 router.post("/", uploaderProduct.single("thumbnail"), checkRole(["admin", "premium"]), async (req, res) => {
     const { title, description, price, category, code, stock } = req.body
-    let owner = req.session.user.email
+    const owner = req.session.user.email
     if (req.session.user.email === "adminCoder@coder.com") {
         owner = "admin"
     }
-    // const thumbnail = `${config.emailUrl}/img/products/${req.file.filename}`;
     const thumbnail = `https://lans-accesorios.up.railway.app/img/products/${req.file.filename}`;
     const product = { title, description, price, thumbnail, category, code, stock, owner }
     if (!title || !description || !price || !category || !code || !stock) {
@@ -76,9 +75,7 @@ router.delete('/:pId', checkRole(["admin", "premium"]), async (req, res) => {
     }
 
     const product = await pManager.getProductById(idProduct)
-    if (product.owner) {
-        await sendDeleteProduct(product.owner, product.title);
-    }
+    await sendDeleteProduct(product.owner, product.title);
     if (product.owner == req.session.user.email || req.session.user.role == "admin") {
         const deletedProduct = await pManager.deleteProduct(idProduct)
         res.send({ status: 'sucess', deletedProduct })
