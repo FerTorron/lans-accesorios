@@ -679,4 +679,9 @@ footer .socialIcons i {
   .formContainer p {
     margin-bottom: 25px;
   }
+
+  .userContainer {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
 }
