@@ -6,7 +6,7 @@ import { sendDeleteUsers } from "../utils/email.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", checkRole(["admin"]), async (req, res) => {
     try {
         const users = await userModel.find({}, "first_name last_name email role")
         res.send(users)

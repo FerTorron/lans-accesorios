@@ -453,6 +453,11 @@ nav ul li:not(.profileNav):hover::after {
   background: #fff;
   color: #277593;
 }
+.inlineItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 /* CARSECTION */
 .cardSection {

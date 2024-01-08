@@ -34,14 +34,11 @@ currentUser()
 
 currentUser()
 
-const agregarProd = (idCart, idProduct) => {
+const agregarProd = (idCart, idProduct, quantity) => {
     const url = `/api/carts/${idCart}/products/${idProduct}`
-    const bodyPost = [
-        {
-            quantity: 1
-        }
-    ]
-
+    const bodyPost = {
+        quantity: quantity
+    }
     fetch(url, {
         method: 'POST',
         headers: {
@@ -82,6 +79,8 @@ const agregarProd = (idCart, idProduct) => {
 addButton.forEach(addButton => {
     addButton.addEventListener("click", (id) => {
         const idProduct = id.target.id;
-        agregarProd(cartId, idProduct);
+        const selectElement = event.target.parentElement.querySelector('select');
+        const quantity = parseInt(selectElement.value, 10);
+        agregarProd(cartId, idProduct, quantity);
     });
 });

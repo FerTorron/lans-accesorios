@@ -127,34 +127,35 @@ const purchaseAction = (idCart) => {
     })
         .then(response => {
             if (response.ok) {
-                console.log('Solicitud POST exitosa');
-
-                Swal.fire({
-                    toast: true,
-                    position: "top-right",
-                    title: `Compra Realizada con Éxito`,
-                    timer: 2000,
-                    showConfirmButton: false,
-                    icon: "info"
-                })
-                window.location.replace('/')
+                return response.json(); // Devuelve otra promesa con los datos JSON
             } else {
-                console.error('Error en la solicitud POST');
-
-                Swal.fire({
-                    toast: true,
-                    position: "top-right",
-                    title: `Hubo un problema al finalizar su compra`,
-                    timer: 2000,
-                    showConfirmButton: false,
-                    icon: "error"
-                })
+                throw new Error('Hubo un problema al finalizar su compra');
             }
+        })
+        .then(data => {
+            Swal.fire({
+                icon: 'success',
+                title: `Ticket: ${data.code}`,
+                text: `Gastaste $${data.amount}`,
+                allowOutsideClick: false,
+            }).then(() => {
+                window.location.href = '/';
+            });
         })
         .catch(error => {
             console.error('Error en la solicitud POST:', error);
+
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                title: 'Hubo un problema al finalizar su compra',
+                timer: 2000,
+                showConfirmButton: false,
+                icon: 'error',
+            });
         });
-}
+};
+
 
 deleteButton.forEach(deleteButton => {
     deleteButton.addEventListener("click", (id) => {
