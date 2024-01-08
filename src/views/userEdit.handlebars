@@ -1,15 +1,24 @@
 <div class="mainContainer">
-  <div>
+  <section class="editUsers">
     <h1>Editar Usuario</h1>
-  </div>
-  <div>
-    <span>ID: {{userEdit._id}}</span>
-    <h3>User: {{userEdit.first_name}}</h3>
-    <p>Email: {{userEdit.email}}</p>
-    <p>Role: {{userEdit.role}}</p>
-    <button id="{{userEdit._id}}" class="editRoleUser">Editar Rol</button>
-    <button id="{{userEdit._id}}" class="deleteUser">Eliminar Usuario</button>
-  </div>
+    <div class="usersSection">
+      {{#if users.length}}
+        {{#each users}}
+          <div class="userContainer">
+            <span>ID: {{_id}}</span>
+            <h3>{{first_name}}</h3>
+            <p>{{email}}</p>
+            <p>Role: {{role}}</p>
+            <button id="{{_id}}" class="editRoleUser">Editar Rol</button>
+            <button id="{{_id}}" class="deleteUser">Eliminar Usuario</button>
+          </div>
+        {{/each}}
+      {{else}}
+        <h3>No hay usuarios disponibles</h3>
+      {{/if}}
+    </div>
+  </section>
+
 </div>
 
 <script src="/js/editUser.js"></script>

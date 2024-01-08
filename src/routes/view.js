@@ -2,7 +2,6 @@ import { Router } from "express";
 import ProductManager from "../dao/managers/productManagerMongo.js";
 import CartManager from "../dao/managers/cartManagerMongo.js";
 import { userModel } from "../dao/models/user.js";
-
 const router = Router()
 const pManager = new ProductManager()
 const cManager = new CartManager()
@@ -127,13 +126,13 @@ router.get('/reset-password', (req, res) => {
         token: token
     })
 })
-router.get('/user-edit/:uid', checkRole(["admin"]), async (req, res) => {
+router.get('/users', checkRole(["admin"]), async (req, res) => {
     try {
-        const userEdit = await userModel.findById(req.params.uid).lean()
+        const users = await userModel.find({}, "first_name last_name email role").lean()
 
         res.render('userEdit', {
             title: 'Lans - Editar Usuario',
-            userEdit
+            users
         })
     } catch (error) {
         console.error(error);

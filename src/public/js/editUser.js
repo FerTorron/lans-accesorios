@@ -1,5 +1,5 @@
-const editRoleUser = document.querySelector(".editRoleUser")
-const deleteUserBtn = document.querySelector(".deleteUser")
+const editRoleUser = document.querySelectorAll(".editRoleUser")
+const deleteUserBtn = document.querySelectorAll(".deleteUser")
 
 const editUser = (idUser) => {
     const url = `/api/users/premium/${idUser}`
@@ -62,7 +62,7 @@ const deleteUser = (idUser) => {
                     showConfirmButton: false,
                     icon: "info"
                 })
-                window.location.replace('/')
+                location.reload();
             } else {
                 console.error('Error en la solicitud DELETE');
 
@@ -81,12 +81,16 @@ const deleteUser = (idUser) => {
         });
 }
 
-editRoleUser.addEventListener("click", () => {
-    const idUser = event.target.id;
-    editUser(idUser);
+editRoleUser.forEach(editButton => {
+    editButton.addEventListener("click", (id) => {
+        const idUser = id.target.id;
+        editUser(idUser);
+    });
 });
 
-deleteUserBtn.addEventListener("click", () => {
-    const idUser = event.target.id;
-    deleteUser(idUser);
+deleteUserBtn.forEach(deleteButton => {
+    deleteButton.addEventListener("click", (id) => {
+        const idUser = id.target.id;
+        deleteUser(idUser);
+    });
 });
