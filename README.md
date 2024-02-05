@@ -1,4 +1,4 @@
-<h1 align="center">🚲️ BikeStore 🚲️</h1>
+<h1 align="center">Lans Accesorios</h1>
 <img src="https://github.com/FerTorron/lans-accesorios/assets/100718699/aa72ae10-99f6-4474-aa3f-57c1e866ff51">
 
 Este es un proyecto de Ecommerce. Fullstack
